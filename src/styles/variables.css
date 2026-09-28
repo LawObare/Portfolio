@@ -1,0 +1,65 @@
+:root {
+  /* 5-Color Palette Core Visual Identity */
+  --color-cerulean: #086788;
+  --color-cyan: #07A0C3;
+  --color-amber: #F0C808;
+  --color-papaya: #FFF1D0;
+  --color-scarlet: #DD1C1A;
+
+  /* Abstract color roles */
+  --bg-primary: var(--color-papaya);
+  --bg-secondary: var(--color-cerulean);
+  --text-primary: #1A1A1A; /* Near black for light backgrounds */
+  --text-secondary: var(--color-cerulean);
+  --text-light: var(--color-papaya);
+
+  --border-color: rgba(8, 103, 136, 0.2);
+
+  /* Spacing System (8pt grid) */
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-80: 5rem;
+  --space-96: 6rem;
+  --space-120: 7.5rem;
+
+  /* Typography */
+  --font-primary: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-base: 1rem;     /* 16px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-lg: 1.25rem;    /* 20px */
+  --text-xl: 1.5rem;     /* 24px */
+  --text-2xl: 2rem;      /* 32px */
+  --text-3xl: 2.5rem;    /* 40px */
+  --text-4xl: 3rem;      /* 48px */
+  --text-5xl: 4rem;      /* 64px */
+  --text-6xl: 5rem;      /* 80px */
+  --text-7xl: 6rem;      /* 96px */
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows - Use sparingly per spec */
+  --shadow-sm: 0 2px 4px rgba(8, 103, 136, 0.05);
+  --shadow-md: 0 4px 12px rgba(8, 103, 136, 0.1);
+  --shadow-lg: 0 12px 24px rgba(8, 103, 136, 0.15);
+
+  /* Transitions */
+  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --max-width: 1200px;
+  --header-height: 80px;
+}

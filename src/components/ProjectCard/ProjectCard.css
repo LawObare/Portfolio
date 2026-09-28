@@ -1,0 +1,184 @@
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .project-card {
+    flex-direction: row;
+    height: auto;
+  }
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Visual Area */
+.project-card-visual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  background-color: var(--card-bg);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .project-card-visual {
+    width: 40%;
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+}
+
+.pc-visual-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.1));
+  z-index: 1;
+}
+
+.pc-number {
+  position: absolute;
+  bottom: var(--space-16);
+  right: var(--space-16);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--color-papaya);
+  opacity: 0.8;
+  z-index: 3;
+}
+
+/* Specific Geometry Styles */
+.pc-geo-wrapper {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  z-index: 2;
+  transition: transform var(--transition-normal);
+}
+
+.project-card:hover .pc-geo-wrapper {
+  transform: scale(1.03);
+}
+
+/* Geometry: Progress Bar */
+.pc-geo-line-v {
+  position: absolute;
+  left: 50%; top: 10%; bottom: 10%;
+  width: 2px;
+  background-color: var(--card-primary);
+  opacity: 0.5;
+}
+.pc-geo-block {
+  position: absolute;
+  left: calc(50% - 15px);
+  width: 30px; height: 10px;
+  border-radius: 2px;
+}
+
+/* Geometry: Pamoja Build */
+.pc-geo-circle {
+  position: absolute;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 4px solid;
+  background: transparent;
+}
+.pc-geo-line-d {
+  position: absolute;
+  top: 45%; left: 35%;
+  width: 40%; height: 2px;
+  background-color: var(--card-primary);
+  transform: rotate(45deg);
+}
+
+/* Geometry: Paykit */
+.pc-geo-rect {
+  position: absolute;
+  border-radius: var(--radius-sm);
+}
+.pc-geo-dot {
+  position: absolute;
+  width: 12px; height: 12px;
+  background-color: var(--card-accent);
+  border-radius: 50%;
+}
+
+/* Geometry: ASCII */
+.pc-geo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  background-color: rgba(255, 241, 208, 0.9);
+  border-radius: var(--radius-sm);
+}
+
+/* Content Area */
+.project-card-content {
+  padding: var(--space-32) var(--space-24);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .project-card-content {
+    padding: var(--space-48);
+  }
+}
+
+.pc-meta {
+  margin-bottom: var(--space-12);
+}
+
+.pc-title {
+  margin-bottom: var(--space-16);
+}
+
+.pc-description {
+  margin-bottom: var(--space-24);
+  flex-grow: 1;
+}
+
+.pc-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-bottom: var(--space-32);
+}
+
+.pc-tech {
+  background-color: rgba(8, 103, 136, 0.05);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+}
+
+.pc-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  color: var(--color-cerulean);
+  font-weight: 700;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.pc-action-icon {
+  transition: transform var(--transition-fast);
+}
+
+.project-card:hover .pc-action-icon {
+  transform: translateX(4px);
+}

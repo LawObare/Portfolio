@@ -1,0 +1,154 @@
+.contact-section {
+  position: relative;
+  background-color: var(--color-cerulean);
+  color: var(--color-papaya);
+  overflow: hidden;
+  padding: var(--space-80) 0;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .contact-section {
+    padding: var(--space-120) 0;
+    min-height: 80vh;
+  }
+}
+
+/* Background Geometry */
+.contact-bg-geo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contact-geo-red {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  max-width: 600px;
+  max-height: 600px;
+  background-color: var(--color-scarlet);
+  border-radius: 50%;
+  opacity: 0.9;
+  transform: scale(0);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-geo-cyan {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 150px solid var(--color-cyan);
+  opacity: 0.7;
+  transform: translateY(50px) rotate(-15deg);
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+
+.contact-geo-yellow {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 80px;
+  height: 80px;
+  background-color: var(--color-amber);
+  opacity: 0.8;
+  transform: scale(0) rotate(45deg);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 400ms;
+}
+
+/* Reveal State */
+.contact-content.revealed ~ * .contact-geo-red, /* Fallback if structure changes */
+.contact-section:hover .contact-geo-red,
+.contact-geo-red {
+  transform: scale(1); /* Assuming section enters view, handled mostly via CSS reveals on content, but doing a simpler load state for backgrounds */
+  animation: bgRevealRed 1s forwards ease-out;
+}
+
+.contact-geo-cyan { animation: bgRevealCyan 1s forwards ease-out 200ms; }
+.contact-geo-yellow { animation: bgRevealYellow 1s forwards ease-out 400ms; }
+
+@keyframes bgRevealRed { to { transform: scale(1); } }
+@keyframes bgRevealCyan { to { transform: translateY(0) rotate(-15deg); } }
+@keyframes bgRevealYellow { to { transform: scale(1) rotate(45deg); } }
+
+
+/* Content */
+.contact-container {
+  position: relative;
+  z-index: 2;
+}
+
+.contact-content {
+  max-width: 800px;
+}
+
+.contact-heading {
+  color: var(--color-papaya);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-bottom: var(--space-32);
+}
+
+.contact-subheading {
+  display: block;
+  color: var(--color-scarlet);
+}
+
+.contact-text {
+  color: rgba(255, 241, 208, 0.9);
+  margin-bottom: var(--space-48);
+  max-width: 600px;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  align-items: center;
+}
+
+.contact-btn-primary {
+  background-color: var(--color-scarlet);
+  color: var(--color-papaya);
+  font-size: var(--text-base);
+  padding: var(--space-16) var(--space-32);
+}
+
+.contact-btn-primary:hover {
+  background-color: var(--color-papaya);
+  color: var(--color-scarlet);
+}
+
+.contact-btn-secondary {
+  border-color: var(--color-papaya);
+  color: var(--color-papaya);
+}
+
+.contact-btn-secondary:hover {
+  background-color: var(--color-papaya);
+  color: var(--color-cerulean);
+}
+
+.action-arrow, .action-arrow-up {
+  transition: transform var(--transition-fast);
+}
+
+.contact-btn-primary:hover .action-arrow {
+  transform: translateX(4px);
+}
+
+.contact-btn-secondary:hover .action-arrow-up {
+  transform: translate(2px, -2px);
+}

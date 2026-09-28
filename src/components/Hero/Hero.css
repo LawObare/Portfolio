@@ -1,0 +1,226 @@
+.hero-section {
+  min-height: 100vh;
+  padding-top: var(--header-height);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-48);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-64);
+  }
+}
+
+/* Content Area */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.hero-greeting {
+  color: var(--color-cyan);
+  margin-bottom: var(--space-16);
+}
+
+.hero-role {
+  font-family: var(--font-primary);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-24);
+  color: var(--text-primary);
+}
+
+.hero-description {
+  max-width: 500px;
+  margin-bottom: var(--space-32);
+  color: var(--text-primary);
+  opacity: 0.9;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  color: var(--color-cerulean);
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-full);
+}
+
+.btn-icon:hover {
+  background-color: rgba(8, 103, 136, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Visual Area */
+.hero-visual {
+  position: relative;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.geo-composition {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--space-32);
+}
+
+@media (min-width: 768px) {
+  .geo-composition {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+/* Geometric Elements */
+.geo-base-shape {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-cerulean);
+  border-radius: 50% 50% 0 0; /* Arch shape */
+  transition: transform 0.1s ease-out; /* Smooth parallax */
+}
+
+.geo-main-frame {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  background-color: var(--color-papaya);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  z-index: 2;
+  transition: transform 0.1s ease-out;
+}
+
+.geo-portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.geo-initials {
+  font-family: var(--font-primary);
+  font-size: var(--text-6xl);
+  font-weight: 800;
+  color: var(--color-papaya);
+  letter-spacing: -0.05em;
+}
+
+.geo-accent-1 {
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--color-scarlet);
+  border-radius: 50%;
+  z-index: 3;
+  transition: transform 0.1s ease-out;
+}
+
+.geo-accent-2 {
+  position: absolute;
+  bottom: 20px;
+  left: -20px;
+  width: 80px;
+  height: 80px;
+  background-color: var(--color-amber);
+  border-radius: var(--radius-md);
+  z-index: 3;
+  transition: transform 0.1s ease-out;
+}
+
+/* Metrics */
+.hero-metrics {
+  display: flex;
+  gap: var(--space-48);
+  margin-top: auto;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.metric-title {
+  font-family: var(--font-primary);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.metric-desc {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-cerulean);
+  text-transform: uppercase;
+}
+
+/* Animations */
+.reveal-hero-1,
+.reveal-hero-2,
+.reveal-hero-3,
+.reveal-hero-4,
+.reveal-hero-5,
+.reveal-hero-6 {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+.hero-container.loaded .reveal-hero-1 { animation: heroReveal 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards 100ms; }
+.hero-container.loaded .reveal-hero-2 { animation: heroReveal 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards 200ms; }
+.hero-container.loaded .reveal-hero-3 { animation: heroReveal 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards 300ms; }
+.hero-container.loaded .reveal-hero-4 { animation: heroReveal 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards 400ms; }
+.hero-container.loaded .reveal-hero-5 { animation: heroReveal 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards 500ms; }
+.hero-container.loaded .reveal-hero-6 { animation: heroReveal 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards 600ms; }
+
+@keyframes heroReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-container * {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

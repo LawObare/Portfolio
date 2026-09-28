@@ -1,0 +1,139 @@
+.journey-section {
+  background-color: var(--color-papaya);
+}
+
+.journey-header {
+  margin-bottom: var(--space-64);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .journey-header {
+    text-align: left;
+  }
+}
+
+.journey-timeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Vertical Line Animation */
+.journey-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background-color: rgba(8, 103, 136, 0.2);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+@media (min-width: 768px) {
+  .journey-line {
+    left: 50%;
+    margin-left: -1px;
+  }
+}
+
+.journey-timeline-container.revealed .journey-line {
+  animation: growLine 1s ease-out forwards;
+}
+
+@keyframes growLine {
+  to { transform: scaleY(1); }
+}
+
+/* Stages */
+.journey-stages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+.journey-stage {
+  position: relative;
+  display: flex;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.journey-timeline-container.revealed .journey-stage {
+  animation: revealStage 500ms ease-out forwards;
+  animation-delay: var(--stage-delay);
+}
+
+@keyframes revealStage {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Markers */
+.stage-marker {
+  position: absolute;
+  left: 20px;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-papaya);
+  border: 3px solid var(--color-cerulean);
+  z-index: 2;
+  margin-top: 6px;
+}
+
+@media (min-width: 768px) {
+  .stage-marker {
+    left: 50%;
+  }
+}
+
+.journey-stage.active .stage-marker {
+  border-color: var(--color-scarlet);
+  background-color: var(--color-scarlet);
+}
+
+/* Content */
+.stage-content {
+  margin-left: var(--space-48);
+  background-color: #fff;
+  padding: var(--space-24);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .stage-content {
+    margin-left: 0;
+    width: calc(50% - var(--space-48));
+  }
+
+  /* Alternate sides on desktop */
+  .journey-stage:nth-child(odd) .stage-content {
+    margin-left: auto;
+  }
+
+  .journey-stage:nth-child(even) .stage-content {
+    margin-right: auto;
+    text-align: right;
+  }
+}
+
+.stage-title {
+  color: var(--color-cerulean);
+  margin-bottom: var(--space-8);
+}
+
+.journey-stage.active .stage-title {
+  color: var(--color-scarlet);
+}
+
+.stage-desc {
+  margin-bottom: 0;
+  font-size: var(--text-sm);
+}

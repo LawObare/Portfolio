@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lawrence Obare — Backend-focused Full-Stack Software Engineer." />
+    <title>Lawrence Obare | Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <header class="site-header" id="home">
+      <nav class="navbar container" aria-label="Primary navigation">
+        <a class="brand" href="#home" aria-label="Lawrence Obare home">LO.</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        <div class="nav-links" id="nav-links">
+          <a class="active" href="#home">Home</a><a href="#about">About</a><a href="#projects">My Projects</a>
+          <a href="#services">My Services</a><a href="#stack">My Stack</a><a href="#articles">Articles</a>
+        </div>
+        <a class="button button-dark nav-contact" href="#contact">Contact me</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow hero-enter greeting">Hello there, I’m</p>
+            <h1 class="hero-enter name" id="hero-title"><span>Lawrence</span> <em>Obare</em></h1>
+            <p class="hero-description hero-enter description">Backend-focused Full-Stack Software Engineer. Building practical software systems with Go, APIs, databases, payment integrations, and modern web technologies.</p>
+            <div class="hero-actions hero-enter actions"><a class="button button-outline" href="Lawrence-Obare-CV.pdf" download>Download my CV</a><a class="button button-dark" href="#projects">View my work</a></div>
+            <div class="connect hero-enter social"><span>Let’s connect</span><div class="social-links"><a href="https://linkedin.com" aria-label="LinkedIn">in</a><a href="https://github.com" aria-label="GitHub">gh</a><a href="https://x.com" aria-label="X">𝕏</a><a href="mailto:hello@lawrenceobare.dev" aria-label="Email">@</a></div></div>
+          </div>
+          <div class="hero-art hero-enter art" aria-label="Portrait placeholder for Lawrence Obare">
+            <div class="orb orb-large"></div><div class="orb orb-small"></div>
+            <div class="portrait"><span>LO</span><p>Lawrence<br />Obare</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about scroll-section" id="about" aria-labelledby="about-title"><div class="container about-panel">
+        <div class="about-image"><div class="image-placeholder">GO<br /><small>BUILD / SHIP / IMPROVE</small></div><div class="accent-block"></div></div>
+        <div class="about-content"><h2 id="about-title">About Me</h2><p>I’m a software developer focused on building practical, reliable products. I specialize in Go and backend development, and I enjoy connecting sound architecture, clear APIs, and useful interfaces into complete systems. My work includes authentication, business workflows, data processing, and payment integrations.</p></div>
+      </div></section>
+
+      <section class="projects section scroll-section" id="projects" aria-labelledby="projects-title"><div class="container">
+        <div class="section-heading"><h2 id="projects-title">My Projects</h2></div>
+        <div class="project-grid">
+          <article class="project-card"><div class="project-visual visual-payments"><span>PAYMENT<br />FLOW</span></div><div><h3>Payment Collection Platform</h3><p>A service for payment collection, reconciliation, transaction records, and reporting.</p></div></article>
+          <article class="project-card"><div class="project-visual visual-api"><span>GO / API</span></div><div><h3>Business API Platform</h3><p>Reliable backend services with authentication, business logic, and third-party integrations.</p></div></article>
+          <article class="project-card"><div class="project-visual visual-dashboard"><span>DATA<br />DASHBOARD</span></div><div><h3>Operations Dashboard</h3><p>A data-driven interface for tracking workflows, activity, and business performance.</p></div></article>
+        </div>
+        <div class="carousel-bar"><div class="dots" aria-label="Project carousel pagination"><i class="active"></i><i></i><i></i><i></i><i></i><i></i></div><div class="arrows"><button aria-label="Previous projects">←</button><button aria-label="Next projects">→</button></div></div>
+      </div></section>
+
+      <section class="services section scroll-section" id="services" aria-labelledby="services-title"><div class="container"><div class="section-heading"><h2 id="services-title">Services I Provide</h2></div>
+        <div class="service-list">
+          <details class="service" open><summary><span>01.</span><strong>Backend &amp; API Development (Go)</strong><b>↗</b></summary><p>I design backend architecture, REST APIs, authentication, business logic, data-processing services, and integrations that are clear to maintain and dependable in production.</p></details>
+          <details class="service"><summary><span>02.</span><strong>Full-Stack Web Development</strong><b>↗</b></summary><p>I build complete applications from database to user interface, including responsive dashboards, user management, application state, and business workflows.</p></details>
+          <details class="service"><summary><span>03.</span><strong>Fintech &amp; Payment Solutions</strong><b>↗</b></summary><p>I integrate M-Pesa, Airtel Money, Pesapal, Flutterwave, and payment workflows for collection, transaction processing, reconciliation, and reporting.</p></details>
+          <details class="service"><summary><span>04.</span><strong>Infrastructure &amp; Deployment</strong><b>↗</b></summary><p>I package and deploy services with Docker and Linux, making systems easier to run and operate.</p></details>
+        </div>
+      </div></section>
+
+      <section class="stack section scroll-section" id="stack" aria-labelledby="stack-title"><div class="container"><div class="section-heading"><h2 id="stack-title">My Stack</h2></div>
+        <div class="stack-grid" aria-label="Technology stack"><span>Go</span><span>TypeScript</span><span>JavaScript</span><span>Svelte</span><span>Node.js</span><span>PostgreSQL</span><span>MySQL</span><span>Redis</span><span>Docker</span><span>Linux</span><span>REST API</span><span>HTML</span><span>CSS</span><span>Git</span><span>M-Pesa</span><span>Flutterwave</span><span>Pesapal</span><span>Airtel Money</span></div>
+      </div></section>
+
+      <section class="articles section scroll-section" id="articles" aria-labelledby="articles-title"><div class="container"><div class="section-heading"><h2 id="articles-title">Articles &amp; Posts</h2><p>Notes on backend systems, product delivery, and practical engineering.</p></div>
+        <div class="article-grid">
+          <article class="article-card"><div class="article-image image-code"></div><small>5 min read</small><h3>Designing APIs that are easy to use</h3><p>How clear boundaries and predictable responses improve product development.</p><a href="#contact">Read more <span>→</span></a></article>
+          <article class="article-card"><div class="article-image image-fintech"></div><small>6 min read</small><h3>Payment integrations: what to plan for</h3><p>A practical look at callbacks, reconciliation, and operational visibility.</p><a href="#contact">Read more <span>→</span></a></article>
+          <article class="article-card"><div class="article-image image-go"></div><small>4 min read</small><h3>Why Go fits service-oriented products</h3><p>Thoughts on building focused, maintainable backend services in Go.</p><a href="#contact">Read more <span>→</span></a></article>
+        </div>
+      </div></section>
+
+      <section class="contact section scroll-section" id="contact" aria-labelledby="contact-title"><div class="container"><div class="section-heading"><h2 id="contact-title">Contact Me</h2><p>Have a product, integration, or operational challenge to solve? Let’s talk.</p></div>
+        <div class="contact-layout"><div class="contact-grid"><article><h3>Email</h3><p>For project conversations and collaboration.</p><a href="mailto:hello@lawrenceobare.dev">hello@lawrenceobare.dev</a></article><article><h3>WhatsApp</h3><p>For a quick introduction or project question.</p><a href="https://wa.me/">Start new chat</a></article><article><h3>Phone</h3><p>Available for focused project discussions.</p><a href="tel:+254700000000">+254 700 000 000</a></article><article><h3>My Location</h3><p>Working remotely and with teams across regions.</p><a href="#contact">Nairobi, Kenya</a></article></div>
+          <form class="email-card"><label for="email">Email me now</label><input id="email" name="email" type="email" placeholder="Your email address" required /><textarea name="message" placeholder="Tell me about your project" required></textarea><button class="button button-dark" type="submit">Send message</button></form></div>
+      </div></section>
+    </main>
+
+    <footer class="footer scroll-section"><div class="container footer-main"><div><a class="brand" href="#home">LO.</a><p>Backend-focused Full-Stack Software Engineer.</p></div><div><h3>Quick links</h3><div class="footer-links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#services">Services</a><a href="#articles">Articles</a><a href="#contact">Contact</a></div></div></div><div class="container footer-bottom"><span>© <span id="year"></span> Lawrence Obare</span><span><a href="#home">Privacy Policy</a><a href="#home">Terms of Service</a><a href="#home">Cookies Settings</a></span></div></footer>
+    <script src="script.js"></script>
+  </body>
+</html>

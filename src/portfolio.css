@@ -213,7 +213,7 @@ header nav {
 
 .bigOrb {
   background: var(--o);
-  z-index: 0;
+  z-index: 1;
   width: 781px;
   height: 781px;
   top: 393px;
@@ -222,7 +222,7 @@ header nav {
 
 .smallOrb {
   background: var(--soft);
-  z-index: 1;
+  z-index: 0;
   width: 357px;
   height: 357px;
   top: 354px;

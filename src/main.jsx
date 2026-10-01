@@ -114,8 +114,8 @@ const services = [
 const projects = [
   {
     title: 'Amatsi',
-    text: 'A modern web application built to solve real-world problems using cutting-edge technologies.',
-    fullText: 'Amatsi is a modern web application built to solve real-world problems using cutting-edge technologies. The platform provides a seamless experience for users and integrates robust data processing under the hood.',
+    text: 'A full-stack smart-irrigation advisory system combining satellite weather and soil data to deliver personalized irrigation recommendations via SMS.',
+    fullText: "Amatsi is a full-stack smart-irrigation advisory system for smallholder farmers that combines satellite weather and soil data from KijaniBox with a deterministic rule engine to deliver personalized irrigation recommendations (irrigate now, wait for rain, monitor, or conserve water) via SMS through Africa's Talking. The platform features a Next.js frontend with OpenStreetMap integration, a Go backend API with Redis/Asynq job queuing, a Python AI service for recommendations, and PostgreSQL persistence, all deployed on Vercel, Render, and Upstash with seamless local development via Docker Compose and full rate limiting and security controls.",
     img: imgAmatsi,
     link: 'https://amatsi.vercel.app/'
   },

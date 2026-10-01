@@ -114,19 +114,22 @@ const services = [
 const projects = [
   {
     title: 'Amatsi',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    text: 'A modern web application built to solve real-world problems using cutting-edge technologies.',
+    fullText: 'Amatsi is a modern web application built to solve real-world problems using cutting-edge technologies. The platform provides a seamless experience for users and integrates robust data processing under the hood.',
     img: imgAmatsi,
     link: 'https://amatsi.vercel.app/'
   },
   {
     title: 'Mwangaza',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    text: 'Satellite-driven farm advisory system fetching real-time weather data to generate and send SMS alerts to farmers.',
+    fullText: "Mwangaza is a satellite-driven farm advisory system that fetches real-time weather data from OpenWeatherMap, runs a decision engine to generate farming recommendations, and sends SMS alerts to farmers via Africa's Talking. The full-stack application includes a Go REST API backend, a Flutter mobile/web dashboard with OpenStreetMap integration, and SQLite-backed demo data with seamless Docker Compose deployment for offline-first hackathon-friendly demos.",
     img: imgMwangaza,
     link: 'https://mwangaza-mwangaza.vercel.app/'
   },
   {
     title: 'Progress Bar',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    text: 'A developer growth companion tool designed to help developers stay consistent with long-term goals through structured planning and progress tracking.',
+    fullText: "Progressbar (v2) is a developer growth companion tool designed to help developers stay consistent with long-term goals through structured planning, progress tracking, and reflection. Built with React + Vite on the frontend, it's a refined MVP that improves on version 1 by focusing on feature maturity and production readiness. Version 1 serves as a feature testing ground while v2 represents the polished, final deliverable.",
     img: imgProgressbar,
     link: 'https://progressbar-roan.vercel.app/'
   },
@@ -318,7 +321,7 @@ function About() {
   );
 }
 
-function Projects() {
+function Projects({ onSelectProject }) {
   return (
     <section className="projects" id="projects">
       <div className="wide">
@@ -336,9 +339,9 @@ function Projects() {
               <div className="card-body">
                 <div className="card-title-row">
                   <h3>{p.title}</h3>
-                  <a href={p.link} target="_blank" rel="noreferrer" aria-label={`View ${p.title}`}>
+                  <button className="project-arrow-btn" onClick={() => onSelectProject(p)} aria-label={`View ${p.title} details`}>
                     <ExternalArrow />
-                  </a>
+                  </button>
                 </div>
                 <p>{p.text}</p>
               </div>
@@ -541,8 +544,45 @@ function EmailModal({ open, onClose }) {
   );
 }
 
+function ProjectModal({ project, onClose }) {
+  if (!project) return null;
+
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="presentation">
+      <div
+        className="email-modal project-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" type="button" onClick={onClose} aria-label="Close">
+          <img src={closeIcon} alt="" width={24} height={24} />
+        </button>
+        <div className="modal-title">
+          <h2 id="project-modal-title">
+            {project.title}
+          </h2>
+        </div>
+        <div className="project-modal-body">
+          <div className="project-modal-img-wrapper">
+             <img src={project.img} alt={project.title} className="project-modal-img" />
+          </div>
+          <p>{project.fullText}</p>
+          <div className="project-modal-actions">
+            <a href={project.link} target="_blank" rel="noreferrer" className="black">
+              Visit Site
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
   const progressRef = useRef(null);
 
   useEffect(() => {
@@ -589,7 +629,7 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Projects />
+        <Projects onSelectProject={setSelectedProject} />
         <Services />
         <Stack />
         <Articles />
@@ -597,6 +637,7 @@ function App() {
       </main>
       <Footer onEmail={() => setModalOpen(true)} />
       <EmailModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </>
   );
 }

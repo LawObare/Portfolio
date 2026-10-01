@@ -340,7 +340,7 @@ function Projects() {
 }
 
 function Services() {
-  const [expanded, setExpanded] = useState(1);
+  const [expanded, setExpanded] = useState(null);
 
   return (
     <section className="services" id="services">

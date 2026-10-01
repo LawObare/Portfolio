@@ -113,16 +113,22 @@ const services = [
 
 const projects = [
   {
-    title: 'Project1',
+    title: 'Amatsi',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    img: imgAmatsi,
+    link: 'https://amatsi.vercel.app/'
   },
   {
-    title: 'Project2',
+    title: 'Mwangaza',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    img: imgMwangaza,
+    link: 'https://mwangaza-mwangaza.vercel.app/'
   },
   {
-    title: 'Project3',
+    title: 'Progress Bar',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    img: imgProgressbar,
+    link: 'https://progressbar-roan.vercel.app/'
   },
 ];
 

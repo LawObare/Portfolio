@@ -128,20 +128,35 @@ header.scrolled {
 }
 
 /* Project / Article Card Hover */
-.projects article, .articles article {
+.articles article {
   transition: transform 250ms, box-shadow 250ms;
 }
-.projects article:hover, .articles article:hover {
+.articles article:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 24px rgba(0,0,0,0.1);
 }
 .card-media, .articleCards img {
   overflow: hidden;
+  border-radius: 12px;
 }
-.card-media img, .articleCards img {
+.card-media {
+  transition: box-shadow 400ms, transform 400ms;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+.card-media img {
+  transition: transform 400ms;
+  box-shadow: none !important; /* override the static shadow from portfolio.css */
+}
+.articleCards img {
   transition: transform 400ms;
 }
-.projects article:hover .card-media img, .articles article:hover img {
+.projects article:hover .card-media {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+.projects article:hover .card-media img {
+  transform: scale(1.04);
+}
+.articles article:hover img {
   transform: scale(1.04);
 }
 

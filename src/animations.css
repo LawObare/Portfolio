@@ -1,0 +1,237 @@
+:root {
+  --anim-easing: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Page load animations (Hero) */
+.hero-stage > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeIn 700ms var(--anim-easing) forwards;
+}
+
+@keyframes heroFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: navFadeIn 500ms var(--anim-easing) 100ms forwards;
+  transition: background 250ms ease, box-shadow 250ms ease;
+}
+
+header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes navFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero .greeting { animation-delay: 250ms; }
+.hero .heroName { animation-delay: 350ms; }
+.hero .heroText { animation-delay: 500ms; }
+.hero .hero-ctas { animation-delay: 650ms; }
+.hero .connect-label, .hero .connect-socials { animation-delay: 800ms; }
+
+/* Hero visual */
+.portrait-frame img.portrait {
+  opacity: 0;
+  transform: scale(1.04);
+  animation: heroImageIn 1200ms var(--anim-easing) forwards;
+}
+
+@keyframes heroImageIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Intersection Observer Base classes */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 650ms var(--anim-easing), transform 650ms var(--anim-easing);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 700ms var(--anim-easing), transform 700ms var(--anim-easing);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 700ms var(--anim-easing), transform 700ms var(--anim-easing);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 350ms var(--anim-easing), transform 350ms var(--anim-easing);
+}
+
+/* When visible */
+.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1) !important;
+}
+
+/* Specific Staggers */
+.stagger-1 { transition-delay: 100ms; }
+.stagger-2 { transition-delay: 200ms; }
+.stagger-3 { transition-delay: 300ms; }
+.stagger-4 { transition-delay: 400ms; }
+.stagger-5 { transition-delay: 500ms; }
+.stagger-6 { transition-delay: 600ms; }
+.stagger-7 { transition-delay: 700ms; }
+.stagger-8 { transition-delay: 800ms; }
+
+/* Contact Button Hover */
+.contactBtn {
+  transition: transform 200ms, box-shadow 200ms;
+}
+.contactBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.contactBtn:active {
+  transform: translateY(0);
+}
+
+/* CTA Buttons Hover */
+.outline, .black {
+  transition: transform 250ms, box-shadow 250ms, background 250ms, color 250ms;
+}
+.outline:hover, .black:hover {
+  transform: translateY(-3px);
+}
+.black:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.outline:hover {
+  background: var(--o);
+  color: #fff;
+}
+
+/* Social icons hover */
+.socials a {
+  transition: transform 200ms, background 200ms, scale 200ms;
+}
+.socials a:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Project / Article Card Hover */
+.projects article, .articles article {
+  transition: transform 250ms, box-shadow 250ms;
+}
+.projects article:hover, .articles article:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+.card-media, .articleCards img {
+  overflow: hidden;
+}
+.card-media img, .articleCards img {
+  transition: transform 400ms;
+}
+.projects article:hover .card-media img, .articles article:hover img {
+  transform: scale(1.04);
+}
+
+/* Article arrow hover */
+.articleCards a img {
+  transition: transform 200ms;
+}
+.articleCards article:hover a img {
+  transform: translateX(4px);
+}
+
+/* Service hover */
+.service {
+  transition: border-color 200ms, transform 200ms, background 250ms;
+  border: 1px solid transparent;
+}
+.service:hover {
+  border-color: var(--o);
+  transform: translateX(3px);
+}
+
+/* Stack hover - override previous */
+.stack-icon-wrapper {
+  transition: transform 200ms, border-color 200ms;
+}
+.stack-icon-wrapper:hover {
+  transform: translateY(-3px);
+}
+.stack-icon-wrapper:hover img {
+  transform: scale(1);
+}
+
+/* Progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--o);
+  z-index: 9999;
+  transition: width 100ms ease;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Service Accordion Animation */
+.service-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms var(--anim-easing);
+}
+.service.expanded .service-content {
+  grid-template-rows: 1fr;
+}
+.service-inner {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 300ms var(--anim-easing);
+}
+.service.expanded .service-inner {
+  opacity: 1;
+}
+/* Plus to Minus Rotation */
+.service button i {
+  transition: transform 250ms var(--anim-easing);
+}
+.service.expanded button i {
+  /* Using standard transform if it has standard plus/minus, actually the original uses background color var(--o) and rotate(45deg) which acts like a close icon. We can just keep the original which already has a 0.2s transition. */
+}
+
+/* Hero Orange Accent */
+.heroName .obare {
+  animation: heroAccent 1200ms var(--anim-easing) forwards;
+  animation-delay: 350ms;
+}
+
+@keyframes heroAccent {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}

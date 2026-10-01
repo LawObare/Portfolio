@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './portfolio.css';
+import './animations.css';
 
 import portrait from './assets/figma/hero-portrait.png';
 import projectImage from './assets/figma/project-placeholder.png';
@@ -195,6 +196,19 @@ function Navbar({ onContact }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    const onScroll = () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
       { rootMargin: '-35% 0px -55%' }
@@ -230,6 +244,20 @@ function Navbar({ onContact }) {
 }
 
 function Hero() {
+  const [offsetY, setOffsetY] = useState(0);
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  useEffect(() => {
+    if (isReducedMotion) return;
+    const handleScroll = () => {
+      // Limit to ~60px
+      const y = Math.min(window.scrollY * 0.1, 60);
+      setOffsetY(y);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isReducedMotion]);
+
   return (
     <section className="hero" id="home">
       <div className="hero-stage">
@@ -242,7 +270,7 @@ function Hero() {
         </h1>
         <div className="bigOrb" aria-hidden="true" />
         <div className="smallOrb" aria-hidden="true" />
-        <div className="portrait-frame">
+        <div className="portrait-frame" style={{ transform: `translateY(-${offsetY}px)` }}>
           <img className="portrait" src={portrait} alt="Lawrence Obare" />
         </div>
         <div className="heroText">
@@ -269,10 +297,10 @@ function About() {
   return (
     <section className="about" id="about">
       <div className="aboutCard">
-        <h2>About Me</h2>
-        <div className="aboutImage" />
+        <h2 className="reveal-up">About Me</h2>
+        <div className="aboutImage reveal-left" />
         <i className="aboutAccent" />
-        <p>
+        <p className="reveal-right">
           I’m a software developer passionate about building practical solutions with code. I specialize in Go and backend development, enjoy solving challenging problems, and learn best by building real projects. I’m constantly improving my skills and working toward becoming a strong, well-rounded backend engineer.
         </p>
       </div>
@@ -284,14 +312,14 @@ function Projects() {
   return (
     <section className="projects" id="projects">
       <div className="wide">
-        <div className="heading">
+        <div className="heading reveal-up">
           <h2>
             My <span>Projects</span>
           </h2>
         </div>
         <div className="cards">
-          {projects.map((p) => (
-            <article key={p.title}>
+          {projects.map((p, index) => (
+            <article className={`reveal-up stagger-${index + 1}`} key={p.title}>
               <div className="card-media">
                 <img src={projectImage} alt="" />
               </div>
@@ -316,14 +344,14 @@ function Services() {
 
   return (
     <section className="services" id="services">
-      <div className="heading">
+      <div className="heading reveal-up">
         <h2>
           <span>Services</span> I Provide
         </h2>
       </div>
       <div className="services-list">
         {services.map((s, i) => (
-          <article className={expanded === i ? 'service expanded' : 'service'} key={s.n}>
+          <article className={`reveal-up stagger-${i + 1} ${expanded === i ? 'service expanded' : 'service'}`} key={s.n}>
             <button type="button" onClick={() => setExpanded(expanded === i ? null : i)}>
               <b>{s.n}</b>
               <span>{s.t}</span>
@@ -331,7 +359,11 @@ function Services() {
                 <img src={arrowForward} alt="" width={24} height={24} />
               </i>
             </button>
-            {expanded === i && <p>{s.p}</p>}
+            <div className="service-content">
+              <div className="service-inner">
+                <p>{s.p}</p>
+              </div>
+            </div>
           </article>
         ))}
       </div>
@@ -342,7 +374,7 @@ function Services() {
 function Stack() {
   return (
     <section className="stack" id="stack">
-      <div className="heading">
+      <div className="heading reveal-up">
         <h2>
           My <span>Stack</span>
         </h2>
@@ -351,7 +383,7 @@ function Stack() {
         {stackRows.map((row, i) => (
           <div className="stack-row" key={i}>
             {row.map((item, j) => (
-              <div className="stack-icon-wrapper" key={`${i}-${j}`}>
+              <div className={`stack-icon-wrapper reveal-scale stagger-${j + 1}`} key={`${i}-${j}`}>
                 <img src={item.src} alt={item.title} />
                 <span className="stack-tooltip">{item.title}</span>
               </div>
@@ -367,7 +399,7 @@ function Articles() {
   return (
     <section className="articles" id="articles">
       <div className="articleWrap">
-        <div className="heading">
+        <div className="heading reveal-up">
           <h2>
             <span>Articles</span> & <span>Posts</span>
           </h2>
@@ -375,7 +407,7 @@ function Articles() {
         </div>
         <div className="articleCards">
           {articles.map((a, i) => (
-            <article key={i}>
+            <article className={`reveal-up stagger-${i + 1}`} key={i}>
               <img src={articleImage} alt="" />
               <small>5 min read</small>
               <h3>{a.title}</h3>
@@ -396,15 +428,15 @@ function Contact() {
   return (
     <section className="contact" id="contact">
       <div className="wide contact-wide">
-        <div className="heading">
+        <div className="heading reveal-up">
           <h2>
             Contact <span>Me</span>
           </h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
         <div className="contact-grid">
-          {contacts.map(([icon, title, text, link, href]) => (
-            <article key={title}>
+          {contacts.map(([icon, title, text, link, href], index) => (
+            <article className={`reveal-up stagger-${index + 1}`} key={title}>
               <img src={icon} alt="" width={48} height={48} />
               <h3>{title}</h3>
               <p>{text}</p>
@@ -497,9 +529,38 @@ function EmailModal({ open, onClose }) {
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = `${totalScroll / windowHeight}`;
+      setScrollProgress(scroll * 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
+      <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />
       <Navbar onContact={() => setModalOpen(true)} />
       <main>
         <Hero />

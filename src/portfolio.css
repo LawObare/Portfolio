@@ -351,6 +351,7 @@ header nav {
   width: min(1209px, calc(100% - 40px));
   height: 583px;
   position: relative;
+  z-index: 10;
   top: -53px;
   margin: 0 auto;
   border-radius: 40px;

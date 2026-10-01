@@ -555,7 +555,7 @@ function App() {
       },
       { threshold: 0.15 }
     );
-    document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach((el) => observer.observe(el));
+    document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .hero-stage > *').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 

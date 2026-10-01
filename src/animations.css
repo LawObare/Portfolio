@@ -6,14 +6,12 @@
 .hero-stage > * {
   opacity: 0;
   transform: translateY(20px);
-  animation: heroFadeIn 700ms var(--anim-easing) forwards;
+  transition: opacity 700ms var(--anim-easing), transform 700ms var(--anim-easing);
 }
 
-@keyframes heroFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.hero-stage > *[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 header {
@@ -35,24 +33,22 @@ header.scrolled {
   }
 }
 
-.hero .greeting { animation-delay: 250ms; }
-.hero .heroName { animation-delay: 350ms; }
-.hero .heroText { animation-delay: 500ms; }
-.hero .hero-ctas { animation-delay: 650ms; }
-.hero .connect-label, .hero .connect-socials { animation-delay: 800ms; }
+.hero .greeting[data-visible="true"] { transition-delay: 250ms; }
+.hero .heroName[data-visible="true"] { transition-delay: 350ms; }
+.hero .heroText[data-visible="true"] { transition-delay: 500ms; }
+.hero .hero-ctas[data-visible="true"] { transition-delay: 650ms; }
+.hero .connect-label[data-visible="true"], .hero .connect-socials[data-visible="true"] { transition-delay: 800ms; }
 
 /* Hero visual */
 .portrait-frame img.portrait {
   opacity: 0;
   transform: scale(1.04);
-  animation: heroImageIn 1200ms var(--anim-easing) forwards;
+  transition: opacity 1200ms var(--anim-easing), transform 1200ms var(--anim-easing);
 }
 
-@keyframes heroImageIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.portrait-frame[data-visible="true"] img.portrait {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Intersection Observer Base classes */

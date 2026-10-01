@@ -547,7 +547,7 @@ function App() {
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
+            e.target.setAttribute('data-visible', 'true');
             observer.unobserve(e.target);
           }
         });

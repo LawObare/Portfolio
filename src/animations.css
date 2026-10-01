@@ -81,7 +81,7 @@ header.scrolled {
 }
 
 /* When visible */
-.is-visible {
+.is-visible, [data-visible="true"] {
   opacity: 1;
   transform: translateY(0) translateX(0) scale(1) !important;
 }

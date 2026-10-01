@@ -548,7 +548,8 @@ function App() {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             e.target.setAttribute('data-visible', 'true');
-            observer.unobserve(e.target);
+          } else {
+            e.target.removeAttribute('data-visible');
           }
         });
       },

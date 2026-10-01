@@ -208,11 +208,11 @@ header nav {
 .smallOrb {
   position: absolute;
   border-radius: 50%;
-  background: var(--o);
   pointer-events: none;
 }
 
 .bigOrb {
+  background: var(--o);
   z-index: 0;
   width: 781px;
   height: 781px;
@@ -221,12 +221,12 @@ header nav {
 }
 
 .smallOrb {
+  background: var(--soft);
   z-index: 1;
   width: 357px;
   height: 357px;
   top: 354px;
   left: 938px;
-  opacity: 0.7;
 }
 
 .heroText {

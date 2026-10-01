@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import './portfolio.css';
 import './animations.css';
@@ -204,7 +204,7 @@ function Navbar({ onContact }) {
         header.classList.remove('scrolled');
       }
     };
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -531,16 +531,25 @@ function EmailModal({ open, onClose }) {
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const progressRef = useRef(null);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollTop;
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scroll = `${totalScroll / windowHeight}`;
-      setScrollProgress(scroll * 100);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (progressRef.current) {
+            const totalScroll = document.documentElement.scrollTop;
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scroll = (totalScroll / windowHeight) * 100;
+            progressRef.current.style.width = `${scroll}%`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -563,7 +572,7 @@ function App() {
 
   return (
     <>
-      <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />
+      <div className="scroll-progress" ref={progressRef} />
       <Navbar onContact={() => setModalOpen(true)} />
       <main>
         <Hero />

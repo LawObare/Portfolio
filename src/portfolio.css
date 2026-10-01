@@ -184,7 +184,7 @@ header nav {
 
 .portrait-frame {
   position: absolute;
-  z-index: 2;
+  z-index: 6;
   top: 145px;
   left: 558px;
   width: 734px;

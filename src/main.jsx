@@ -5,6 +5,10 @@ import './animations.css';
 
 import portrait from './assets/figma/hero-portrait.png';
 import projectImage from './assets/figma/project-placeholder.png';
+import imgAmatsi from './assets/Project images/Amatsi.png';
+import imgMwangaza from './assets/Project images/Mwangaza.png';
+import imgProgressbar from './assets/Project images/progressbar.png';
+
 import articleImage from './assets/figma/article-placeholder.png';
 import mail from './assets/figma/contact-mail.svg';
 import whatsapp from './assets/figma/contact-whatsapp.svg';
@@ -321,12 +325,14 @@ function Projects() {
           {projects.map((p, index) => (
             <article className={`reveal-up stagger-${index + 1}`} key={p.title}>
               <div className="card-media">
-                <img src={projectImage} alt="" />
+                <img src={p.img || projectImage} alt={p.title} />
               </div>
               <div className="card-body">
                 <div className="card-title-row">
                   <h3>{p.title}</h3>
-                  <ExternalArrow />
+                  <a href={p.link} target="_blank" rel="noreferrer" aria-label={`View ${p.title}`}>
+                    <ExternalArrow />
+                  </a>
                 </div>
                 <p>{p.text}</p>
               </div>

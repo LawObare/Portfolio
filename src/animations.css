@@ -159,11 +159,10 @@ header.scrolled {
 
 /* Service hover */
 .service {
-  transition: border-color 200ms, transform 200ms, background 250ms;
-  border: 1px solid transparent;
+  transition: transform 200ms, box-shadow 250ms, background 250ms;
 }
 .service:hover {
-  border-color: var(--o);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
   transform: translateX(3px);
 }
 

@@ -97,7 +97,7 @@ const services = [
   {
     n: '02.',
     t: 'Full-Stack Web Development (JavaScript/Typescript)',
-    p: 'I am able to connect frontend and backend systems seamlessly, develop end-to-end applications from database to user interface, implement authentication and user management systems, build platforms for alumni networks, community connections, and institutional systems, and create developer tools and productivity applications.',
+    p: 'I am able to connect frontend and backend systems seamlessly, develop end-to-end applications from database to user interface, and implement authentication and user management systems.',
   },
   {
     n: '03.',

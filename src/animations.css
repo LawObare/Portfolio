@@ -128,14 +128,8 @@ header.scrolled {
 }
 
 /* Project / Article Card Hover */
-.articles article {
-  transition: transform 250ms, box-shadow 250ms;
-}
-.articles article:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-}
-.card-media, .articleCards img {
+/* Articles/Projects now handle hover at the image level */
+.card-media {
   overflow: hidden;
   border-radius: 12px;
 }
@@ -147,18 +141,16 @@ header.scrolled {
   transition: transform 400ms;
   box-shadow: none !important; /* override the static shadow from portfolio.css */
 }
-.articleCards img {
-  transition: transform 400ms;
-}
-.projects article:hover .card-media {
+
+.projects article:hover .card-media,
+.articles article:hover .card-media {
   box-shadow: 0 12px 24px rgba(0,0,0,0.15);
 }
-.projects article:hover .card-media img {
+.projects article:hover .card-media img,
+.articles article:hover .card-media img {
   transform: scale(1.04);
 }
-.articles article:hover img {
-  transform: scale(1.04);
-}
+
 
 /* Article arrow hover */
 .articleCards a img {

@@ -408,7 +408,9 @@ function Articles() {
         <div className="articleCards">
           {articles.map((a, i) => (
             <article className={`reveal-up stagger-${i + 1}`} key={i}>
-              <img src={articleImage} alt="" />
+              <div className="card-media">
+                <img src={articleImage} alt="" />
+              </div>
               <small>5 min read</small>
               <h3>{a.title}</h3>
               <p>{a.text}</p>

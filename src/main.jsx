@@ -70,10 +70,10 @@ const nav = [
 ];
 
 const socialLinks = [
-  { href: 'https://linkedin.com', label: 'LinkedIn', type: 'img', src: socialLi },
-  { href: 'https://github.com', label: 'GitHub', type: 'github' },
-  { href: 'https://x.com', label: 'X', type: 'img', src: socialTw },
-  { href: 'https://dev.to', label: 'DEV', type: 'img', src: socialDv },
+  { href: 'https://www.linkedin.com/in/lawrence-obare-bb0390425/', label: 'LinkedIn', type: 'img', src: socialLi },
+  { href: 'https://github.com/LawObare', label: 'GitHub', type: 'github' },
+  { href: 'https://x.com/Lawinvisioned', label: 'X', type: 'img', src: socialTw },
+  { href: 'https://dev.to/obare', label: 'DEV', type: 'img', src: socialDv },
 ];
 
 const stackRows = [

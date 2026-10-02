@@ -229,35 +229,3 @@ header.scrolled {
   100% { opacity: 1; }
 }
 
-/* ——— Parallax Hover Animations ——— */
-
-/* About Section */
-.aboutImage {
-  /* Using 700ms from reveal-left automatically, but overriding for hover */
-  transition: opacity 700ms var(--anim-easing), transform 400ms var(--anim-easing) !important;
-}
-.aboutAccent {
-  transition: transform 400ms var(--anim-easing);
-}
-.aboutCard:hover .aboutImage {
-  transform: translate(-12px, -12px) !important;
-}
-.aboutCard:hover .aboutAccent {
-  transform: translate(12px, 12px);
-}
-
-/* Hobbies Section */
-.hobbies-videos,
-.hobbies-big-orb,
-.hobbies-small-orb {
-  transition: transform 500ms var(--anim-easing);
-}
-.hobbies-visual:hover .hobbies-videos {
-  transform: translate(-12px, -12px);
-}
-.hobbies-visual:hover .hobbies-big-orb {
-  transform: translate(15px, 10px);
-}
-.hobbies-visual:hover .hobbies-small-orb {
-  transform: translate(-15px, 20px);
-}

@@ -1115,14 +1115,14 @@ footer hr {
   }
 
   .hero {
-    min-height: 920px;
+    min-height: 1050px;
     overflow: hidden;
   }
 
   .hero-stage {
     width: 100%;
     height: auto;
-    min-height: 920px;
+    min-height: 1050px;
     left: 0;
     margin-left: 0;
     transform: none;
@@ -1169,7 +1169,7 @@ footer hr {
 
   .hero-ctas {
     left: 24px;
-    top: 420px;
+    top: 320px;
     width: calc(100% - 48px);
     flex-direction: column;
     align-items: stretch;
@@ -1183,18 +1183,19 @@ footer hr {
 
   .connect-label {
     left: 24px;
-    top: 580px;
+    top: 490px;
   }
 
   .connect-socials {
     left: 24px;
-    top: 620px;
+    top: 530px;
   }
 
   .portrait-frame {
-    left: auto;
-    right: -30px;
-    top: 540px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 610px;
     width: 320px;
     height: 380px;
   }
@@ -1207,17 +1208,19 @@ footer hr {
   }
 
   .bigOrb {
-    left: auto;
-    right: -80px;
-    top: 620px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 680px;
     width: 360px;
     height: 360px;
   }
 
   .smallOrb {
-    left: auto;
-    right: 20px;
-    top: 580px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 640px;
     width: 180px;
     height: 180px;
   }

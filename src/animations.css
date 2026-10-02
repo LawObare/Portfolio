@@ -169,16 +169,7 @@ header.scrolled {
   transform: translateX(3px);
 }
 
-/* Stack hover - override previous */
-.stack-icon-wrapper {
-  transition: transform 200ms, border-color 200ms;
-}
-.stack-icon-wrapper:hover {
-  transform: translateY(-3px);
-}
-.stack-icon-wrapper:hover img {
-  transform: scale(1);
-}
+/* Stack hover (icon zoom + slight blur + overlaid name) is defined in portfolio.css */
 
 /* Progress bar */
 .scroll-progress {

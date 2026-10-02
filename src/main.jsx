@@ -1,6 +1,7 @@
 import aboutVideo from "./assets/About video.mp4";
 import { useEffect, useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
+import golfVideo from './assets/Hobbies/Golf shot.mp4';
 import './portfolio.css';
 import './animations.css';
 
@@ -11,6 +12,9 @@ import imgMwangaza from './assets/Project images/Mwangaza.png';
 import imgProgressbar from './assets/Project images/progressbar.png';
 
 import articleImage from './assets/figma/article-placeholder.png';
+import postAmbassador from './assets/posts/Ambassador.jpeg';
+import postKanz from './assets/posts/Kanz.png';
+import postPiscine from './assets/posts/Piscine.jpeg';
 import mail from './assets/figma/contact-mail.svg';
 import whatsapp from './assets/figma/contact-whatsapp.svg';
 import phone from './assets/figma/contact-phone.svg';
@@ -62,6 +66,7 @@ const nav = [
   ['My Services', 'services'],
   ['My Stack', 'stack'],
   ['Articles', 'articles'],
+  ['My Hobbies', 'hobbies'],
 ];
 
 const socialLinks = [
@@ -138,24 +143,29 @@ const projects = [
 
 const articles = [
   {
-    title: 'Blog title heading will go here',
+    title: "My close up with the Chargé d'Affaires",
+    image: postAmbassador,
+    objectPosition: 'center 20%',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
   },
   {
-    title: 'Blog title heading will go here',
+    title: "Smashed records in the world's biggest hackathon",
+    image: postKanz,
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
   },
   {
-    title: 'Blog title heading will go here',
+    title: 'Piscine, the tough selection process that broke a child but built a man',
+    image: postPiscine,
+    objectPosition: 'center top',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
   },
 ];
 
 const contacts = [
-  [mail, 'Email', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.', 'email@example.com', 'mailto:email@example.com'],
-  [whatsapp, 'WhatsApp', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.', 'Start new chat', 'https://wa.me/'],
-  [phone, 'Phone', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.', '+1 (555) 000-0000', 'tel:+15550000000'],
-  [location, 'My Location', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in ero.', '123 Sample St, Sydney NSW 2000 AU', '#contact'],
+  [mail, 'Email', 'Feel free to reach out to me via email for any inquiries or collaborations.', 'obarelawrence.acc@gmail.com', 'mailto:obarelawrence.acc@gmail.com'],
+  [whatsapp, 'WhatsApp', 'Send me a direct message on WhatsApp for a quick chat.', 'Start new chat', 'https://wa.me/254741133956'],
+  [phone, 'Phone', 'You can call me directly on my personal number.', '+254 741 133 956', 'tel:+254741133956'],
+  [location, 'My Location', 'I am currently based in Nairobi, Kenya, open to remote and global opportunities.', 'Nairobi, Kenya', '#contact'],
 ];
 
 function Socials() {
@@ -456,7 +466,7 @@ function Articles() {
           {articles.map((a, i) => (
             <article className={`reveal-up stagger-${i + 1}`} key={i}>
               <div className="card-media">
-                <img src={articleImage} alt="" />
+                <img src={a.image || articleImage} alt="" style={{ objectPosition: a.objectPosition || 'center' }} />
               </div>
               <small>5 min read</small>
               <h3>{a.title}</h3>
@@ -468,6 +478,43 @@ function Articles() {
           ))}
         </div>
         <CarouselControls />
+      </div>
+    </section>
+  );
+}
+
+
+function Hobbies() {
+  return (
+    <section className="hobbies" id="hobbies">
+      <div className="wide">
+        <div className="heading reveal-up">
+          <h2>
+            My <span>Hobbies</span>
+          </h2>
+        </div>
+        <div className="hobbies-content">
+          <div className="hobbies-visual reveal-left">
+            <div className="hobbies-big-orb" aria-hidden="true" />
+            <div className="hobbies-small-orb" aria-hidden="true" />
+            <div className="hobbies-videos">
+              <video 
+                className="hobby-video" 
+                src={golfVideo} 
+                autoPlay
+                loop
+                muted 
+                playsInline
+                style={{ opacity: 1 }}
+              />
+            </div>
+          </div>
+          <div className="hobbies-text reveal-right">
+            <p>
+              Outside code I love immersing myself in fun and challenging activities. I love mostly golfing. Its a good way to recollect after a long week, get some fresh air and stretch my back. I love traveling, mostly because of the feel of the open road and the excitement that comes with seeing new places. I also love reading and hanging out with friends and family.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -554,6 +601,14 @@ function EmailModal({ open, onClose }) {
           className="modal-form"
           onSubmit={(e) => {
             e.preventDefault();
+            const formData = new FormData(e.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            window.location.href = `mailto:obarelawrence.acc@gmail.com?subject=${subject}&body=${body}`;
             onClose();
           }}
         >
@@ -657,7 +712,7 @@ function App() {
   return (
     <>
       <div className="scroll-progress" ref={progressRef} />
-      <Navbar onContact={() => setModalOpen(true)} />
+      <Navbar onContact={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} />
       <main>
         <Hero />
         <About />
@@ -665,6 +720,7 @@ function App() {
         <Services />
         <Stack />
         <Articles />
+        <Hobbies />
         <Contact />
       </main>
       <Footer onEmail={() => setModalOpen(true)} />

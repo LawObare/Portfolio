@@ -267,7 +267,7 @@ function Navbar({ onContact }) {
   );
 }
 
-function Hero() {
+function Hero({ onViewCV }) {
   const [offsetY, setOffsetY] = useState(0);
   const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -301,9 +301,9 @@ function Hero() {
           <p>Software Engineer & UI/UX Designer. Bulding solutions and having fun along the way</p>
         </div>
         <div className="hero-ctas">
-          <a className="outline" href={cvFile} download="Lawrence_Obare_CV.pdf">
-            Download my CV
-          </a>
+          <button type="button" className="outline" onClick={onViewCV} style={{ cursor: 'pointer', background: 'transparent' }}>
+            View my CV
+          </button>
           <a className="black" href="#projects">
             View my work
           </a>
@@ -631,6 +631,41 @@ function EmailModal({ open, onClose }) {
   );
 }
 
+function CVModal({ open, onClose }) {
+  if (!open) return null;
+
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="presentation">
+      <div
+        className="email-modal project-modal cv-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cv-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" type="button" onClick={onClose} aria-label="Close">
+          <img src={closeIcon} alt="" width={24} height={24} />
+        </button>
+        <div className="modal-title cv-header-row">
+          <h2 id="cv-modal-title" style={{ margin: 0, fontSize: '36px' }}>
+            My <span>CV</span>
+          </h2>
+          <a className="black cv-download-btn" href={cvFile} download="Lawrence_Obare_CV.pdf">
+            Download CV
+          </a>
+        </div>
+        <div className="project-modal-body">
+          <iframe 
+            src={cvFile} 
+            title="CV" 
+            className="cv-iframe"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ProjectModal({ project, onClose }) {
   if (!project) return null;
 
@@ -669,6 +704,7 @@ function ProjectModal({ project, onClose }) {
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [cvModalOpen, setCvModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const progressRef = useRef(null);
 
@@ -714,7 +750,7 @@ function App() {
       <div className="scroll-progress" ref={progressRef} />
       <Navbar onContact={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} />
       <main>
-        <Hero />
+        <Hero onViewCV={() => setCvModalOpen(true)} />
         <About />
         <Projects onSelectProject={setSelectedProject} />
         <Services />
@@ -726,6 +762,7 @@ function App() {
       <Footer onEmail={() => setModalOpen(true)} />
       <EmailModal open={modalOpen} onClose={() => setModalOpen(false)} />
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <CVModal open={cvModalOpen} onClose={() => setCvModalOpen(false)} />
     </>
   );
 }

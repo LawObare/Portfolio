@@ -1,3 +1,4 @@
+import aboutVideo from "./assets/About video.mp4";
 import { useEffect, useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import './portfolio.css';
@@ -72,19 +73,19 @@ const socialLinks = [
 
 const stackRows = [
   [
-    { src: s01, title: 'Vue.js' }, { src: s02, title: 'React' }, { src: s03, title: 'SQL Developer' },
+    { src: s01, title: 'Vue.js' }, { src: s02, title: 'React' }, { src: s03, title: 'MongoDB' },
     { src: s04, title: 'SQLite' }, { src: s05, title: 'Svelte' }, { src: s06, title: 'Supabase' },
-    { src: s07, title: 'WordPress' }, { src: s08, title: 'Node.js' }, { src: s09, title: 'Go / Golang' }
+    { src: s07, title: 'WordPress' }, { src: s08, title: 'Node.js' }, { src: s09, title: 'Neovim' }
   ],
   [
-    { src: s10, title: 'Docker' }, { src: s11, title: 'Docker / Kubernetes' }, { src: s12, title: 'Python' },
+    { src: s10, title: 'Go' }, { src: s11, title: 'VS Code' }, { src: s12, title: 'Python' },
     { src: s13, title: 'Flutter' }, { src: s14, title: 'MySQL' }, { src: s15, title: 'PostgreSQL' },
-    { src: s16, title: 'Redis' }, { src: s17, title: 'NPM' }, { src: s18, title: 'Fiber' }
+    { src: s16, title: 'Redis' }, { src: s17, title: 'npm' }, { src: s18, title: 'Firebase' }
   ],
   [
-    { src: s19, title: 'Gin' }, { src: s20, title: 'FastAPI' }, { src: s21, title: 'Git' },
-    { src: s22, title: 'GitHub' }, { src: s23, title: 'Linux/WSL' }, { src: s24, title: 'Vercel' },
-    { src: s25, title: 'Vite' }, { src: s26, title: 'HTML5' }, { src: s27, title: 'CSS3' }
+    { src: s19, title: 'Figma' }, { src: s20, title: 'Vite' }, { src: s21, title: 'JavaScript' },
+    { src: s22, title: 'npm' }, { src: s23, title: 'CSS3' }, { src: s24, title: 'HTML5' },
+    { src: s25, title: 'Linux' }, { src: s26, title: 'Docker' }, { src: s27, title: 'GitHub' }
   ],
 ];
 
@@ -306,12 +307,43 @@ function Hero() {
   );
 }
 
+
 function About() {
+  const containerRef = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="about" id="about">
       <div className="aboutCard">
         <h2 className="reveal-up">About Me</h2>
-        <div className="aboutImage reveal-left" />
+        <div className="aboutImage reveal-left" ref={containerRef}>
+          {inView && (
+            <video
+              src={aboutVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          )}
+        </div>
         <i className="aboutAccent" />
         <p className="reveal-right">
           I’m a software developer passionate about building practical solutions with code. I specialize in Go and backend development, enjoy solving challenging problems, and learn best by building real projects. I’m constantly improving my skills and working toward becoming a strong, well-rounded backend engineer.
@@ -391,7 +423,7 @@ function Stack() {
     <section className="stack" id="stack">
       <div className="heading reveal-up">
         <h2>
-          My <span>Stack</span>
+          My <span>Stack</span> and <span>Tools</span>
         </h2>
       </div>
       <div className="stack-rows">

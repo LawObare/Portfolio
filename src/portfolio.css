@@ -379,6 +379,7 @@ header nav {
   height: 313px;
   border-radius: 12px;
   background: var(--gray);
+  overflow: hidden;
 }
 
 .aboutAccent {
@@ -662,6 +663,7 @@ header nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .stack-icon-wrapper img {
@@ -669,11 +671,19 @@ header nav {
   height: 50px;
   max-width: 65px;
   object-fit: contain;
-  transition: transform 0.2s;
+  transition: transform 320ms var(--anim-easing, cubic-bezier(0.22, 1, 0.36, 1)),
+    filter 320ms var(--anim-easing, cubic-bezier(0.22, 1, 0.36, 1));
 }
 
+/* Raise the hovered icon above its neighbours so the zoom + label are not clipped */
+.stack-icon-wrapper:hover {
+  z-index: 5;
+}
+
+/* Zoom / expand the icon and blur it slightly so the overlaid name stands out */
 .stack-icon-wrapper:hover img {
-  transform: scale(1.05);
+  transform: scale(1.45);
+  filter: blur(2.5px);
 }
 
 .stack-row:nth-child(2) .stack-icon-wrapper:first-child img {
@@ -681,40 +691,35 @@ header nav {
   height: 40px;
 }
 
+/* Tool / technology name overlaid on top of the icon */
 .stack-tooltip {
   position: absolute;
-  bottom: 100%;
-  margin-bottom: 8px;
-  background: #333;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font: 500 14px/1.2 var(--mont);
+  top: 50%;
+  left: 50%;
+  display: block;
+  margin: 0;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #111;
+  font: 700 11px/1.15 var(--mont);
+  letter-spacing: 0.01em;
   white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
-  transform: translateY(4px);
+  transform: translate(-50%, -50%) scale(0.75);
+  transition: opacity 220ms var(--anim-easing, cubic-bezier(0.22, 1, 0.36, 1)),
+    transform 220ms var(--anim-easing, cubic-bezier(0.22, 1, 0.36, 1)),
+    visibility 220ms var(--anim-easing, cubic-bezier(0.22, 1, 0.36, 1));
   pointer-events: none;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 10;
-}
-
-.stack-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: #333 transparent transparent transparent;
+  z-index: 6;
 }
 
 .stack-icon-wrapper:hover .stack-tooltip {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 /* ——— Articles ——— */

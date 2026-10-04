@@ -6,6 +6,7 @@ import './portfolio.css';
 import './animations.css';
 
 import portrait from './assets/figma/hero-portrait.png';
+import mobilePortrait from './assets/figma/hero-image-2.png';
 import projectImage from './assets/figma/project-placeholder.png';
 import imgAmatsi from './assets/Project images/Amatsi.png';
 import imgMwangaza from './assets/Project images/Mwangaza.png';
@@ -146,18 +147,50 @@ const articles = [
     title: "My close up with the Chargé d'Affaires",
     image: postAmbassador,
     objectPosition: 'center 20%',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    text: 'An inspiring encounter where I had the privilege to discuss technology and innovation with the diplomatic envoy.',
+    content: (
+      <>
+        <p className="lead">An inspiring encounter where I had the privilege to discuss technology and innovation with the diplomatic envoy.</p>
+        
+        <p>Before my journey into tech, the closest I had ever come to meeting a high-ranking official was during high school. I distinctly remember the excitement when our principal announced a visit from the Minister of Education. However, the reality of that day was far less personal than I had hoped. I was simply one of hundreds of students bundled in a massive crowd, catching only a fleeting glimpse of the visiting dignitary. For a long time, that was my only reference point for interacting with influential figures—distant, formal, and entirely inaccessible.</p>
+        
+        <p>That perception changed completely shortly after I joined Zone01 Kisumu. I was still relatively new and barely known by the wider team, so it came as a complete surprise when I was selected as one of the apprentices to engage directly with the U.S. Chargé d'Affaires, Susan M. Barnes, during her visit to our campus.</p>
+        
+        <h2>The Weight of Expectation</h2>
+        <p>As the moment of the visit approached, the pressure began to mount. I was incredibly nervous, certain that I would stumble over my words. I spent time trying to mentally rehearse exactly what I was going to say, striving for the perfect professional pitch. In hindsight, over-preparing in this way was a recipe for disaster. I was building up the interaction to be an intimidating, high-stakes presentation rather than a genuine conversation.</p>
+        
+        <p>When she finally approached my desk, every perfectly crafted phrase I had practiced completely vanished from my mind. I braced myself to fumble through the interaction, but what happened next caught me entirely off guard. She didn't approach me with the stiff formality I had anticipated; instead, she spoke with a remarkably calm, compassionate, and welcoming voice.</p>
+        
+
+        <h2>A Genuine Connection</h2>
+        <p>She was genuinely curious about who I was and the projects I had been working on. Within moments, she completely transformed the atmosphere of the room. As we spoke about technology, innovation, and my personal journey, the daunting hierarchy dissolved. For the duration of our conversation, I didn't feel like I was speaking to a high-ranking embassy official—it felt much more like a casual, engaging chat with a friend who was genuinely invested in my growth.</p>
+        
+        <p>That brief but profound encounter has forever changed my perspective. It taught me that no matter a person's title or status, genuine connection is built on empathy, curiosity, and human warmth. It has fundamentally reshaped how I view and interact with people both in my personal life and professional career, reminding me that true leadership is often found in the ability to make others feel seen, heard, and valued.</p>
+      </>
+    )
   },
   {
     title: "Smashed records in the world's biggest hackathon",
     image: postKanz,
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    text: 'Reflecting on an intense 48 hours of coding, collaboration, and pushing boundaries to build a winning solution.',
+    content: (
+      <>
+        <p className="lead">Reflecting on an intense 48 hours of coding, collaboration, and pushing boundaries to build a winning solution.</p>
+        <p>Coming soon...</p>
+      </>
+    )
   },
   {
     title: 'Piscine, the tough selection process that broke a child but built a man',
     image: postPiscine,
     objectPosition: 'center top',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.',
+    text: 'My journey through the grueling 4-week coding bootcamp that tested my limits and transformed my approach to software development.',
+    content: (
+      <>
+        <p className="lead">My journey through the grueling 4-week coding bootcamp that tested my limits and transformed my approach to software development.</p>
+        <p>Coming soon...</p>
+      </>
+    )
   },
 ];
 
@@ -295,10 +328,12 @@ function Hero({ onViewCV }) {
         <div className="bigOrb" aria-hidden="true" />
         <div className="smallOrb" aria-hidden="true" />
         <div className="portrait-frame" style={{ transform: `translateY(-${offsetY}px)` }}>
-          <img className="portrait" src={portrait} alt="Lawrence Obare" />
+          <picture>
+            <img className="portrait" src={portrait} alt="Lawrence Obare" />
+          </picture>
         </div>
         <div className="heroText">
-          <p>Software Engineer & UI/UX Designer. Bulding solutions and having fun along the way</p>
+          <p>Software Engineer with a strong focus on backend development and problem-solving.</p>
         </div>
         <div className="hero-ctas">
           <button type="button" className="outline" onClick={onViewCV} style={{ cursor: 'pointer', background: 'transparent' }}>
@@ -390,7 +425,7 @@ function Projects({ onSelectProject }) {
             </article>
           ))}
         </div>
-        <CarouselControls />
+        {projects.length > 3 && <CarouselControls total={projects.length} />}
       </div>
     </section>
   );
@@ -452,7 +487,7 @@ function Stack() {
   );
 }
 
-function Articles() {
+function Articles({ onReadArticle }) {
   return (
     <section className="articles" id="articles">
       <div className="articleWrap">
@@ -460,7 +495,7 @@ function Articles() {
           <h2>
             <span>Articles</span> & <span>Posts</span>
           </h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p>Read all about my latest thoughts and experiences in software engineering.</p>
         </div>
         <div className="articleCards">
           {articles.map((a, i) => (
@@ -471,13 +506,13 @@ function Articles() {
               <small>5 min read</small>
               <h3>{a.title}</h3>
               <p>{a.text}</p>
-              <a href="#contact">
+              <a href="#" onClick={(e) => { e.preventDefault(); onReadArticle(a); }}>
                 Read more <img src={chevronRight} alt="" width={24} height={24} />
               </a>
             </article>
           ))}
         </div>
-        <CarouselControls />
+        {articles.length > 3 && <CarouselControls total={articles.length} />}
       </div>
     </section>
   );
@@ -528,7 +563,7 @@ function Contact() {
           <h2>
             Contact <span>Me</span>
           </h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p>Feel free to reach out for any inquiries or collaborations.</p>
         </div>
         <div className="contact-grid">
           {contacts.map(([icon, title, text, link, href], index) => (
@@ -595,7 +630,7 @@ function EmailModal({ open, onClose }) {
           <h2 id="write-to-me">
             Write To <span>Me</span>
           </h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p>Fill out the form below to send me a direct message.</p>
         </div>
         <form
           className="modal-form"
@@ -702,10 +737,62 @@ function ProjectModal({ project, onClose }) {
   );
 }
 
+function BlogNavbar({ onBack, onContact }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const onScroll = () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <header>
+      <nav style={{ justifyContent: 'space-between' }}>
+        <button className="back-btn" type="button" onClick={onBack}>
+          <img src={arrowBack} alt="" width={20} height={20} /> Back
+        </button>
+        <button className="contactBtn" type="button" onClick={onContact}>
+          Contact me
+        </button>
+      </nav>
+    </header>
+  );
+}
+
+function BlogPost({ article }) {
+  return (
+    <section className="blog-post">
+      <div className="blog-post-header">
+        <h1>{article.title}</h1>
+        <div className="blog-post-meta">
+          <span>{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span>•</span>
+          <span>5 min read</span>
+        </div>
+      </div>
+      
+      <div className="blog-post-image">
+        <img src={article.image || articleImage} alt={article.title} style={{ objectPosition: article.objectPosition || 'center' }} />
+      </div>
+
+      <div className="blog-post-content">
+        {article.content}
+      </div>
+    </section>
+  );
+}
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [cvModalOpen, setCvModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const progressRef = useRef(null);
 
   useEffect(() => {
@@ -741,9 +828,30 @@ function App() {
       },
       { threshold: 0.15 }
     );
-    document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .hero-stage > *').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+    // Use setTimeout to ensure DOM is fully painted after state change before observing
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .hero-stage > *').forEach((el) => observer.observe(el));
+    }, 0);
+    
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [selectedArticle]);
+
+  if (selectedArticle) {
+    return (
+      <>
+        <div className="scroll-progress" ref={progressRef} />
+        <BlogNavbar onBack={() => setSelectedArticle(null)} onContact={() => setModalOpen(true)} />
+        <main>
+          <BlogPost article={selectedArticle} />
+        </main>
+        <Footer onEmail={() => setModalOpen(true)} />
+        <EmailModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      </>
+    );
+  }
 
   return (
     <>
@@ -755,7 +863,7 @@ function App() {
         <Projects onSelectProject={setSelectedProject} />
         <Services />
         <Stack />
-        <Articles />
+        <Articles onReadArticle={setSelectedArticle} />
         <Hobbies />
         <Contact />
       </main>

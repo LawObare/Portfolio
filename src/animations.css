@@ -16,7 +16,6 @@
 
 header {
   opacity: 0;
-  transform: translateY(-20px);
   animation: navFadeIn 500ms var(--anim-easing) 100ms forwards;
   transition: background 250ms ease, box-shadow 250ms ease;
 }
@@ -29,7 +28,6 @@ header.scrolled {
 @keyframes navFadeIn {
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 

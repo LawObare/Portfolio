@@ -141,10 +141,12 @@ header.scrolled {
 }
 
 .projects article:hover .card-media,
+.posts article:hover .card-media,
 .articles article:hover .card-media {
   box-shadow: 0 12px 24px rgba(0,0,0,0.15);
 }
 .projects article:hover .card-media img,
+.posts article:hover .card-media img,
 .articles article:hover .card-media img {
   transform: scale(1.04);
 }

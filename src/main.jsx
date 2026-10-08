@@ -66,6 +66,7 @@ const nav = [
   ['My Projects', 'projects'],
   ['My Services', 'services'],
   ['My Stack', 'stack'],
+  ['Posts', 'posts'],
   ['Articles', 'articles'],
   ['My Hobbies', 'hobbies'],
 ];
@@ -142,7 +143,7 @@ const projects = [
   },
 ];
 
-const articles = [
+const posts = [
   {
     title: "My close up with the Chargé d'Affaires",
     image: postAmbassador,
@@ -220,12 +221,18 @@ function Socials() {
   );
 }
 
-function CarouselControls({ active = 0, total = 6, onPrev, onNext }) {
+function CarouselControls({ active = 0, total = 6, onPrev, onNext, onSelect }) {
   return (
     <div className="carousel">
       <div className="dots" aria-hidden="true">
         {Array.from({ length: total }, (_, i) => (
-          <i className={i === active ? 'on' : ''} key={i} />
+          <i
+            className={i === active ? 'on' : ''}
+            key={i}
+            onClick={() => onSelect && onSelect(i)}
+            role={onSelect ? 'button' : undefined}
+            tabIndex={onSelect ? 0 : undefined}
+          />
         ))}
       </div>
       <div className="slider-btns">
@@ -487,32 +494,220 @@ function Stack() {
   );
 }
 
-function Articles({ onReadArticle }) {
+function Posts({ onReadPost }) {
   return (
-    <section className="articles" id="articles">
+    <section className="posts" id="posts">
       <div className="articleWrap">
         <div className="heading reveal-up">
           <h2>
-            <span>Articles</span> & <span>Posts</span>
+            <span>Posts</span>
           </h2>
-          <p>Read all about my latest thoughts and experiences in software engineering.</p>
+          <p>Read all about my latest thoughts and personal experiences in software engineering.</p>
         </div>
         <div className="articleCards">
-          {articles.map((a, i) => (
+          {posts.map((p, i) => (
             <article className={`reveal-up stagger-${i + 1}`} key={i}>
               <div className="card-media">
-                <img src={a.image || articleImage} alt="" style={{ objectPosition: a.objectPosition || 'center' }} />
+                <img src={p.image || articleImage} alt="" style={{ objectPosition: p.objectPosition || 'center' }} />
               </div>
               <small>5 min read</small>
-              <h3>{a.title}</h3>
-              <p>{a.text}</p>
-              <a href="#" onClick={(e) => { e.preventDefault(); onReadArticle(a); }}>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+              <a href="#" onClick={(e) => { e.preventDefault(); onReadPost(p); }}>
                 Read more <img src={chevronRight} alt="" width={24} height={24} />
               </a>
             </article>
           ))}
         </div>
-        {articles.length > 3 && <CarouselControls total={articles.length} />}
+        {posts.length > 3 && <CarouselControls total={posts.length} />}
+      </div>
+    </section>
+  );
+}
+
+const devToFallbackArticles = [
+  {
+    id: 4810104,
+    title: "Shopping for Skills and MCP Servers (Without Getting Burned)",
+    description: "A year or two ago, giving an AI assistant new abilities meant waiting for the company behind it to ship a feature. Now it feels more like wandering through a market. There are directories full of MCP servers, there are piles of skills on GitHub, and every week someone posts a shiny new one that will supposedly change how you work. I like this a lot, but I've also learned that browsing it is a skill in itself.",
+    readable_publish_date: "Oct 7",
+    reading_time_minutes: 4,
+    url: "https://dev.to/obare/shopping-for-skills-and-mcp-servers-without-getting-burned-49i7",
+    cover_image: null,
+    social_image: "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fqedwkmqiqpaotdlzhcju.png",
+    tag_list: ["ai", "llm", "mcp", "tools"]
+  },
+  {
+    id: 4800269,
+    title: 'Docker: The Tool That Ended "It Works on My Machine"',
+    description: 'Every developer has said it at least once: "But it works on my machine." Maybe your laptop had a slightly different version of Python, or a library installed months ago that you forgot about, or a database configured just so. The code was fine. The environment was the problem, and nobody could tell you exactly how the two differed. Docker is the tool that made me stop having that conversation.',
+    readable_publish_date: "Oct 5",
+    reading_time_minutes: 4,
+    url: "https://dev.to/obare/docker-the-tool-that-ended-it-works-on-my-machine-2ob8",
+    cover_image: null,
+    social_image: "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Frduv3tjbk6xgtq9731j6.png",
+    tag_list: ["devops", "docker", "softwaredevelopment"]
+  },
+  {
+    id: 4800197,
+    title: "DBML: The Small Language I Wish I'd Found Sooner",
+    description: "If you have ever tried to explain a database to someone who didn't build it, you know the pain. You open a file full of CREATE TABLE statements and watch their eyes glaze over. Or you dig up an entity-relationship diagram someone drew eighteen months ago, and it turns out half of it no longer matches reality. DBML is the thing that finally made this problem feel solvable to me.",
+    readable_publish_date: "Oct 5",
+    reading_time_minutes: 3,
+    url: "https://dev.to/obare/dbml-the-small-language-i-wish-id-found-sooner-2if3",
+    cover_image: null,
+    social_image: "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fa9gcmeeb0dk9trh8xk31.png",
+    tag_list: ["architecture", "database", "documentation"]
+  },
+  {
+    id: 4372007,
+    title: "From Text to Action: How Your Code Actually Runs",
+    description: "Every time you hit \"Run,\" a hidden pipeline begins transforming the code you wrote into instructions your computer can actually execute. Although programming languages are designed for humans to read, computers only understand machine code, so your program must first be translated. The journey starts with the lexer, which scans your source code into structured logic for execution.",
+    readable_publish_date: "Aug 11",
+    reading_time_minutes: 2,
+    url: "https://dev.to/obare/from-text-to-action-how-your-code-actually-runs-mg8",
+    cover_image: null,
+    social_image: "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fmfv2fuspi9bmr7w9lhbw.png",
+    tag_list: []
+  },
+  {
+    id: 3899389,
+    title: "Ray Tracing",
+    description: "Honestly, the way dedicated hardware and software engineering have teamed up has totally changed the game for developers making worlds look real. Instead of artists spending weeks manually dropping in fake light bulbs to trick your eyes, they can just place one virtual sun in the scene and let ray tracing physics handle the rest across changing environments.",
+    readable_publish_date: "Jun 14",
+    reading_time_minutes: 2,
+    url: "https://dev.to/obare/ray-tracing-31hm",
+    cover_image: null,
+    social_image: "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F1a0fiwnp85err2fkw5ne.png",
+    tag_list: ["algorithms", "computerscience", "gamedev", "softwareengineering"]
+  }
+];
+
+function Articles({ onSelectArticle }) {
+  const [articlesList, setArticlesList] = useState(devToFallbackArticles);
+  const [page, setPage] = useState(0);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    // Automated real-time fetch from Dev.to with cache-busting
+    fetch(`https://dev.to/api/articles?username=obare&_t=${Date.now()}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch from dev.to');
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setArticlesList((prev) => {
+            const previewMap = new Map(prev.map((p) => [p.id, p.description]));
+            return data.map((a) => ({
+              ...a,
+              description: previewMap.get(a.id) || a.description,
+            }));
+          });
+
+          // Automatically fetch rich first paragraphs for any new or truncated articles
+          data.forEach((article) => {
+            if (article.description && article.description.endsWith('...')) {
+              fetch(`https://dev.to/api/articles/${article.id}`)
+                .then((r) => r.json())
+                .then((detail) => {
+                  if (detail?.body_markdown) {
+                    const firstP = detail.body_markdown
+                      .replace(/^---[\s\S]*?---/, '')
+                      .split('\n')
+                      .map((p) => p.trim())
+                      .find((p) => p.length > 40 && !p.startsWith('#') && !p.startsWith('!'));
+                    if (firstP) {
+                      setArticlesList((curr) =>
+                        curr.map((item) =>
+                          item.id === article.id ? { ...item, description: firstP } : item
+                        )
+                      );
+                    }
+                  }
+                })
+                .catch(() => {});
+            }
+          });
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not fetch dev.to articles dynamically, using cached list:', err);
+      });
+  }, []);
+
+  const cardsPerPage = 3;
+  const totalPages = Math.ceil(articlesList.length / cardsPerPage);
+  const currentArticles = articlesList.slice(page * cardsPerPage, page * cardsPerPage + cardsPerPage);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.setAttribute('data-visible', 'true');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    el.querySelectorAll('.reveal-up').forEach((child) => observer.observe(child));
+    return () => observer.disconnect();
+  }, [page, articlesList]);
+
+  return (
+    <section className="articles" id="articles" ref={containerRef}>
+      <div className="articleWrap">
+        <div className="heading reveal-up">
+          <h2>
+            <span>Articles</span>
+          </h2>
+          <p>Read all about my latest technical write-ups and publications from Dev.to.</p>
+        </div>
+        <div className="articleCards">
+          {currentArticles.map((a, i) => (
+            <article className={`article-text-card reveal-up stagger-${i + 1}`} key={a.id || i}>
+              <div>
+                <div className="article-card-top">
+                  <span className="article-card-meta">
+                    {a.reading_time_minutes ? `${a.reading_time_minutes} min read` : '4 min read'}
+                    {a.readable_publish_date ? ` • ${a.readable_publish_date}` : ''}
+                  </span>
+                  <span className="article-dev-badge">DEV</span>
+                </div>
+                <h3>{a.title}</h3>
+                <p>{a.description}</p>
+              </div>
+              <div className="article-card-footer">
+                {a.tag_list && a.tag_list.length > 0 && (
+                  <div className="article-tags">
+                    {a.tag_list.slice(0, 3).map((tag) => (
+                      <span key={tag} className="article-tag">#{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <button
+                  type="button"
+                  className="article-read-btn"
+                  onClick={() => onSelectArticle && onSelectArticle(a)}
+                >
+                  Read more <img src={chevronRight} alt="" width={20} height={20} />
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+        {totalPages > 1 && (
+          <CarouselControls
+            active={page}
+            total={totalPages}
+            onPrev={() => setPage((p) => (p - 1 + totalPages) % totalPages)}
+            onNext={() => setPage((p) => (p + 1) % totalPages)}
+            onSelect={(i) => setPage(i)}
+          />
+        )}
       </div>
     </section>
   );
@@ -737,6 +932,105 @@ function ProjectModal({ project, onClose }) {
   );
 }
 
+function ArticleModal({ article, onClose }) {
+  const [fullArticle, setFullArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!article?.id) return;
+    setLoading(true);
+    setFullArticle(null);
+
+    fetch(`https://dev.to/api/articles/${article.id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to load article detail');
+        return res.json();
+      })
+      .then((data) => {
+        setFullArticle(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.warn('Could not load detailed article, using summary:', err);
+        setLoading(false);
+      });
+  }, [article?.id]);
+
+  if (!article) return null;
+
+  const paragraphs = fullArticle?.body_markdown
+    ? fullArticle.body_markdown
+        .replace(/^---[\s\S]*?---/, '')
+        .split('\n')
+        .map((p) => p.replace(/^[#*>-]+\s*/, '').trim())
+        .filter((p) => p.length > 30 && !p.startsWith('![') && !p.startsWith('```'))
+        .slice(0, 4)
+    : [article.description];
+
+  return (
+    <div className="modal-backdrop" onClick={onClose} role="presentation">
+      <div
+        className="email-modal project-modal article-preview-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="article-modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" type="button" onClick={onClose} aria-label="Close">
+          <img src={closeIcon} alt="" width={24} height={24} />
+        </button>
+
+        <div className="article-modal-header">
+          <div className="article-modal-meta">
+            <span className="article-dev-badge">DEV.TO</span>
+            <span>{article.reading_time_minutes ? `${article.reading_time_minutes} min read` : '4 min read'}</span>
+            <span>•</span>
+            <span>{article.readable_publish_date || 'Recent'}</span>
+          </div>
+          <h2 id="article-modal-title" style={{ margin: '14px 0 8px', fontSize: '28px', lineHeight: 1.3 }}>
+            {article.title}
+          </h2>
+          {article.tag_list && article.tag_list.length > 0 && (
+            <div className="article-tags" style={{ marginTop: '12px' }}>
+              {article.tag_list.map((tag) => (
+                <span key={tag} className="article-tag">#{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="article-modal-body">
+          <div className="article-modal-preview">
+            {loading && !fullArticle ? (
+              <div>
+                <p className="article-preview-p">{article.description}</p>
+                <span className="article-loading-text">Loading full preview from DEV...</span>
+              </div>
+            ) : (
+              paragraphs.map((para, idx) => (
+                <p key={idx} className="article-preview-p">
+                  {para}
+                </p>
+              ))
+            )}
+          </div>
+
+          <div className="article-modal-actions">
+            <a
+              href={article.url}
+              target="_blank"
+              rel="noreferrer"
+              className="article-view-btn"
+            >
+              View on Dev.to <img src={arrowForward} alt="" width={18} height={18} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function BlogNavbar({ onBack, onContact }) {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -793,6 +1087,7 @@ function App() {
   const [cvModalOpen, setCvModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [selectedDevArticle, setSelectedDevArticle] = useState(null);
   const progressRef = useRef(null);
 
   useEffect(() => {
@@ -863,7 +1158,8 @@ function App() {
         <Projects onSelectProject={setSelectedProject} />
         <Services />
         <Stack />
-        <Articles onReadArticle={setSelectedArticle} />
+        <Posts onReadPost={setSelectedArticle} />
+        <Articles onSelectArticle={setSelectedDevArticle} />
         <Hobbies />
         <Contact />
       </main>
@@ -871,6 +1167,7 @@ function App() {
       <EmailModal open={modalOpen} onClose={() => setModalOpen(false)} />
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       <CVModal open={cvModalOpen} onClose={() => setCvModalOpen(false)} />
+      <ArticleModal article={selectedDevArticle} onClose={() => setSelectedDevArticle(null)} />
     </>
   );
 }
